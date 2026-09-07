@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>James Hirata | Premium brands across Japan and New Zealand</title>
+<meta name="description" content="James Hirata builds premium brands across Japan and New Zealand: Nomad Weddings, Property Media Japan, Queenstown Memories, Niseko Memories, ski rentals, and web design.">
+<link rel="canonical" href="https://www.jameshirata.com/">
+<meta property="og:title" content="James Hirata">
+<meta property="og:description" content="Premium brands across Japan and New Zealand. Weddings, property, lifestyle media, and web design.">
+<meta property="og:url" content="https://www.jameshirata.com/">
+<meta property="og:image" content="https://www.jameshirata.com/img/og.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0F0F0F">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Shippori+Mincho:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "James Hirata",
+  "alternateName": "平田滋睦",
+  "url": "https://www.jameshirata.com/",
+  "jobTitle": "Creative Director",
+  "worksFor": {"@type": "Organization", "name": "Nomado Ltd"},
+  "knowsLanguage": ["en", "ja"],
+  "sameAs": [
+    "https://nomad.wedding/",
+    "https://nomadweddings.jp/",
+    "https://queenstownmemories.jp/",
+    "https://nisekomemories.jp/"
+  ]
+}
+</script>
+
+<style>
+:root{
+  --paper:#0F0F0F;
+  --ink:#F3F1EC;
+  --cobalt:#5B6CFF;
+  --frame:#1E1D1B;
+  --mute:#9A978F;
+  --rule:#2A2926;
+  --rule-inv:#CFCBC3;
+  --body:#D6D3CC;
+  --serif:"Instrument Serif", Georgia, serif;
+  --sans:"Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --gutter:clamp(20px, 4vw, 64px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html[data-theme="light"]{
+  --paper:#FBFAF7;
+  --ink:#121212;
+  --cobalt:#2436E4;
+  --frame:#E6E3DC;
+  --mute:#6F6C66;
+  --rule:#D9D6CF;
+  --rule-inv:#333;
+  --body:#3A3935;
+}
+html[data-lang="ja"]{
+  --serif:"Shippori Mincho", "Hiragino Mincho ProN", serif;
+  --sans:"Noto Sans JP", "Hiragino Sans", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);color:var(--ink);transition:background .4s,color .4s;
+  font-family:var(--sans);font-size:1rem;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+html[data-lang="ja"] body{line-height:1.9}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--cobalt);outline-offset:4px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+/* language switching: every string exists twice, CSS shows one */
+body [lang="ja"]{display:none}
+html[data-lang="ja"] body [lang="ja"]{display:revert}
+html[data-lang="ja"] body [lang="en"]{display:none}
+
+.serif{font-family:var(--serif);font-weight:400}
+.i{font-family:var(--serif);font-style:italic;font-weight:400}
+html[data-lang="ja"] .i{font-style:normal}
+
+/* preloader */
+.loader{
+  position:fixed;inset:0;z-index:100;background:var(--paper);color:var(--ink);
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding:var(--gutter);font-family:var(--serif);
+}
+.loader .n{font-size:clamp(6rem,18vw,16rem);line-height:.8;letter-spacing:-.04em}
+.loader .n small{font-size:.35em;vertical-align:top;margin-left:.1em}
+.loader .w{font-family:var(--sans);font-size:.85rem;color:var(--mute)}
+.loader.done{pointer-events:none}
+
+/* nav */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px var(--gutter);mix-blend-mode:difference;color:#fff;
+  font-size:.85rem;font-weight:500;
+}
+.nav .brand{letter-spacing:.02em}
+.nav ul{display:flex;gap:28px;list-style:none;align-items:center}
+.theme-btn{display:flex;align-items:center}
+.theme-btn svg{transition:transform .6s var(--ease)}
+.theme-btn:hover svg{transform:rotate(90deg)}
+.lang-toggle{display:flex;gap:6px;border:1px solid currentColor;padding:4px 10px;border-radius:999px}
+.lang-toggle span{opacity:.45}
+.lang-toggle span.on{opacity:1}
+@media (max-width:640px){.nav ul li.hide-m{display:none}}
+
+/* hero */
+.hero{
+  min-height:100svh;position:relative;
+  padding:calc(var(--gutter) + 80px) var(--gutter) var(--gutter);
+  display:flex;flex-direction:column;justify-content:flex-end;gap:5vh;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(3rem,7.8vw,9.4rem);line-height:.94;letter-spacing:-.025em;
+  max-width:19ch;text-wrap:balance;
+}
+html[data-lang="ja"] .hero h1{font-size:clamp(2.2rem,5.4vw,6rem);line-height:1.22;letter-spacing:0;max-width:24ch}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line > span{display:inline-block;transform:translateY(110%)}
+.hero .sub{
+  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;
+  max-width:1400px;
+}
+.hero .sub p{max-width:46ch;font-size:1.05rem;color:var(--mute)}
+.hero .sub p strong{color:var(--ink);font-weight:500}
+.hero .where{font-size:.85rem;color:var(--mute);text-align:right;line-height:1.7}
+.kanji{
+  position:absolute;right:var(--gutter);top:calc(var(--gutter) + 90px);
+  writing-mode:vertical-rl;font-family:"Shippori Mincho", serif;
+  font-size:clamp(1.6rem,3.2vw,3.6rem);letter-spacing:.32em;line-height:1;text-orientation:upright;color:var(--ink);
+  opacity:0;
+}
+html[data-lang="ja"] .kanji{font-family:var(--sans);font-weight:500;font-size:clamp(1rem,1.6vw,1.4rem);letter-spacing:.2em;text-orientation:mixed;
+}
+.ring{
+  position:absolute;right:calc(var(--gutter) + 16px);
+  bottom:calc(var(--gutter) + 120px);width:clamp(120px,15vw,200px);height:auto;
+  opacity:0;
+}
+.ring text{font-family:var(--sans);font-size:9.5px;letter-spacing:.22em;fill:var(--cobalt);text-transform:uppercase}
+@media (max-width:900px){
+  .ring{display:none}
+  .kanji{top:auto;bottom:calc(var(--gutter) + 40px)}
+  .hero .sub{grid-template-columns:1fr}
+  .hero .where{text-align:left}
+}
+
+/* marquee */
+.marquee{
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);
+  overflow:hidden;white-space:nowrap;padding:14px 0;
+  font-family:var(--serif);font-size:clamp(1.4rem,2.6vw,2.4rem);
+}
+.marquee .track{display:inline-flex;gap:0;will-change:transform}
+.marquee span{padding:0 .6em}
+.marquee i{font-style:normal;color:var(--cobalt)}
+
+/* sections */
+section{padding:clamp(80px,12vh,160px) var(--gutter)}
+.h2{
+  font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5vw,5.5rem);
+  line-height:1;letter-spacing:-.02em;margin-bottom:.6em;
+}
+html[data-lang="ja"] .h2{letter-spacing:0;line-height:1.25}
+
+/* just about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);align-items:start}
+.about .lede{font-size:1.15rem;max-width:44ch;color:var(--mute)}
+.about .lede strong{color:var(--ink);font-weight:500}
+.services{
+  grid-column:1 / -1;margin-top:8vh;
+  font-size:clamp(2rem,5.6vw,6.2rem);line-height:1.05;letter-spacing:-.02em;
+  font-family:var(--sans);font-weight:500;text-wrap:balance;
+}
+html[data-lang="ja"] .services{line-height:1.3;letter-spacing:0;font-size:clamp(1.8rem,4.6vw,5rem)}
+.services .i{font-size:1.06em;color:var(--cobalt)}
+.services .lt{font-weight:400;color:var(--mute)}
+.services .sm{font-size:.5em;font-weight:400;vertical-align:middle;margin:0 .6em;color:var(--mute)}
+@media (max-width:800px){.about{grid-template-columns:1fr}}
+
+/* cases */
+.cases{padding-top:0}
+.cases header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--ink);padding-bottom:16px;margin-bottom:8vh}
+.cases header .count{font-size:.85rem;color:var(--mute)}
+.case{
+  display:grid;grid-template-columns:8vw 1fr;gap:var(--gutter);
+  padding:6vh 0;border-bottom:1px solid var(--rule);
+}
+.case:last-child{border-bottom:0}
+.case .num{font-family:var(--serif);font-size:clamp(2rem,5vw,5rem);line-height:1;color:var(--cobalt);position:sticky;top:110px;align-self:start}
+.case .body{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:var(--gutter);align-items:end}
+.case figure{
+  aspect-ratio:16/10;overflow:hidden;background:var(--frame);position:relative;
+  border-radius:2px;
+}
+.case figure img{width:100%;height:118%;object-fit:cover;position:absolute;top:-9%;left:0}
+.case figure::after{
+  content:attr(data-drop);position:absolute;left:16px;bottom:14px;
+  font-size:.75rem;color:var(--mute);letter-spacing:.02em;
+}
+.case figure.has-img::after{display:none}
+.case h3{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,4.4vw,4.6rem);line-height:.98;letter-spacing:-.02em;margin-bottom:.35em}
+html[data-lang="ja"] .case h3{line-height:1.25;letter-spacing:0;font-size:clamp(1.9rem,3.6vw,3.8rem)}
+.case .meta{font-size:.85rem;color:var(--mute);margin-bottom:1.2em}
+.case p{max-width:42ch;color:var(--body)}
+.case .go{
+  display:inline-flex;align-items:center;gap:12px;margin-top:1.6em;
+  font-weight:500;border-bottom:1px solid var(--ink);padding-bottom:3px;
+}
+.case .go svg{width:14px;height:14px;transition:transform .35s var(--ease)}
+.case .go:hover svg{transform:translate(3px,-3px)}
+.case .go.soft{border-color:transparent;color:var(--cobalt)}
+@media (max-width:900px){
+  .case{grid-template-columns:1fr;gap:12px}
+  .case .num{position:static}
+  .case .body{grid-template-columns:1fr}
+}
+
+/* numbers */
+.numbers{background:var(--ink);color:var(--paper)}
+.numbers .h2{max-width:14ch}
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--rule-inv);
+}
+.grid div{padding:36px 24px 36px 0;border-bottom:1px solid var(--rule-inv)}
+.grid div:nth-child(4n){padding-right:0}
+.grid b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(3rem,6vw,6.5rem);line-height:1;letter-spacing:-.03em}
+html[data-lang="ja"] .grid b{letter-spacing:0}
+.grid b small{font-size:.4em;letter-spacing:0}
+.grid span{display:block;margin-top:14px;color:var(--mute);font-size:.9rem;max-width:24ch}
+.press{margin-top:8vh;display:flex;gap:40px;flex-wrap:wrap;align-items:baseline;color:var(--mute);font-size:.9rem}
+.press b{font-family:var(--serif);font-weight:400;font-size:1.5rem;color:var(--paper)}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)} .grid div:nth-child(2n){padding-right:0}}
+
+/* timeline */
+.timeline ol{list-style:none;border-top:1px solid var(--ink)}
+.timeline li{
+  display:grid;grid-template-columns:8vw 1fr 1fr;gap:var(--gutter);
+  padding:28px 0;border-bottom:1px solid var(--rule);align-items:baseline;
+}
+.timeline .yr{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.8rem);line-height:1}
+.timeline .what{font-weight:500;font-size:1.1rem}
+.timeline .note{color:var(--mute);max-width:46ch}
+@media (max-width:800px){.timeline li{grid-template-columns:1fr;gap:6px}}
+
+/* footer */
+.foot{
+  padding:clamp(80px,14vh,180px) var(--gutter) var(--gutter);
+  display:flex;flex-direction:column;justify-content:space-between;min-height:80svh;
+}
+.foot .big{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2.2rem,7.2vw,8.6rem);line-height:.98;letter-spacing:-.025em;
+  max-width:16ch;
+}
+html[data-lang="ja"] .foot .big{line-height:1.2;letter-spacing:0;font-size:clamp(2rem,5.6vw,6.4rem)}
+.foot .big a{border-bottom:2px solid var(--cobalt);color:var(--cobalt)}
+.foot .big a:hover{border-color:var(--ink)}
+.foot .bottom{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--gutter);
+  margin-top:12vh;padding-top:24px;border-top:1px solid var(--ink);font-size:.85rem;color:var(--mute);
+}
+.foot .bottom ul{list-style:none;display:flex;gap:20px;flex-wrap:wrap}
+.foot .bottom ul a{color:var(--ink);font-weight:500}
+.foot .bottom .r{text-align:right}
+@media (max-width:800px){.foot .bottom{grid-template-columns:1fr} .foot .bottom .r{text-align:left}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero h1 .line > span{transform:none}
+  .kanji,.ring{opacity:1}
+  .loader{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="w">
+    <span lang="en">James Hirata, Niseko and Queenstown</span>
+    <span lang="ja">平田滋睦、ニセコとクイーンズタウン</span>
+  </div>
+  <div class="n"><span id="pct">0</span><small>%</small></div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="#top">James Hirata</a>
+  <ul>
+    <li class="hide-m"><a href="#work"><span lang="en">Work</span><span lang="ja">仕事</span></a></li>
+    <li class="hide-m"><a href="#story"><span lang="en">Story</span><span lang="ja">経歴</span></a></li>
+    <li><a href="#contact"><span lang="en">Contact</span><span lang="ja">連絡</span></a></li>
+    <li><button class="theme-btn" id="themeBtn" aria-label="Switch light and dark"><svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="10" cy="10" r="4"/><path d="M10 1.5v2.5M10 16v2.5M1.5 10H4M16 10h2.5M4 4l1.8 1.8M14.2 14.2 16 16M4 16l1.8-1.8M14.2 5.8 16 4"/></svg></button></li>
+    <li><button class="lang-toggle" id="langBtn" aria-label="Switch language"><span class="on" data-l="en">EN</span><span data-l="ja">JA</span></button></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="kanji" aria-hidden="true"><span lang="en">平田滋睦</span><span lang="ja">James Hirata</span></div>
+
+  <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+    <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+    <text><textPath href="#circ">Niseko · Queenstown · Kyoto · Tokyo · Okinawa · Otaru · </textPath></text>
+  </svg>
+
+  <h1>
+    <span lang="en">
+      <span class="line"><span>James Hirata builds</span></span>
+      <span class="line"><span>premium brands across</span></span>
+      <span class="line"><span>Japan and New Zealand.</span></span>
+    </span>
+    <span lang="ja">
+      <span class="line"><span>平田滋睦は、日本とニュージーランドで</span></span>
+      <span class="line"><span>プレミアムブランドをつくっています。</span></span>
+    </span>
+  </h1>
+
+  <div class="sub">
+    <p>
+      <span lang="en">Destination weddings, property, lifestyle photography, and the websites that sell them. <strong>Creative Director of Nomado Ltd</strong>, working between Niseko and Queenstown since 2012.</span>
+      <span lang="ja">デスティネーションウェディング、不動産、ライフスタイルフォト、そしてそれらを売るウェブサイト。<strong>Nomado Ltd クリエイティブディレクター。</strong>2012年からニセコとクイーンズタウンを拠点に。</span>
+    </p>
+    <div class="where">
+      <span lang="en">Niseko, Hokkaido<br>Queenstown, New Zealand</span>
+      <span lang="ja">北海道ニセコ<br>ニュージーランド クイーンズタウン</span>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="track">
+    <span>Nomad Weddings <i>NZ</i></span><span>Nomad Weddings <i>Japan</i></span><span>Property Media <i>Japan</i></span><span>Real Estate <i>Consulting</i></span><span>Ski <i>Rentals</i></span><span>Queenstown <i>Memories</i></span><span>Niseko <i>Memories</i></span><span>Web <i>Design</i></span>
+  </div>
+</div>
+
+<section class="about" id="about">
+  <h2 class="h2"><span lang="en">Just about</span><span lang="ja">やっていること</span></h2>
+  <p class="lede">
+    <span lang="en">Most of what I do starts with a camera and ends with a business. I photograph, I plan, I build the site, I run the numbers. <strong>Eight brands, two countries, one team.</strong></span>
+    <span lang="ja">カメラから始まって、事業として終わる。撮影も、企画も、サイト構築も、数字も自分で見る。<strong>8つのブランド、2つの国、1つのチーム。</strong></span>
+  </p>
+  <div class="services">
+    <span lang="en">
+      Destination <span class="i">weddings</span> <span class="sm">and</span> elopements <span class="sm">/</span>
+      <span class="lt">Property</span> media <span class="sm">/</span> Real estate <span class="i">consulting</span> <span class="sm">/</span>
+      Ski <span class="lt">vacation</span> rentals <span class="sm">/</span> Travel <span class="i">photography</span> <span class="sm">/</span>
+      <span class="lt">Web</span> design <span class="sm">and</span> <span class="i">SEO</span>
+    </span>
+    <span lang="ja">
+      デスティネーション<span class="i">ウェディング</span> <span class="sm">/</span>
+      <span class="lt">不動産</span>メディア <span class="sm">/</span> 不動産<span class="i">コンサルティング</span> <span class="sm">/</span>
+      スキー<span class="lt">バケーション</span>レンタル <span class="sm">/</span> 旅の<span class="i">写真</span> <span class="sm">/</span>
+      <span class="lt">ウェブ</span>制作と<span class="i">SEO</span>
+    </span>
+  </div>
+</section>
+
+<section class="cases" id="work">
+  <header>
+    <h2 class="h2" style="margin:0"><span lang="en">Selected work</span><span lang="ja">仕事</span></h2>
+    <span class="count"><span lang="en">Eight brands</span><span lang="ja">8ブランド</span></span>
+  </header>
+
+  <article class="case">
+    <div class="num">1</div>
+    <div class="body">
+      <figure data-drop="img/01-nomad-nz.jpg"><img src="img/01-nomad-nz.jpg" alt="Helicopter wedding in the Southern Alps" loading="eager" onerror="this.remove()"></figure>
+      <div>
+        <h3>Nomad Weddings <br>New Zealand</h3>
+        <div class="meta"><span lang="en">Destination weddings, Queenstown, since 2012</span><span lang="ja">デスティネーションウェディング, クイーンズタウン, 2012年〜</span></div>
+        <p>
+          <span lang="en">Helicopter weddings and elopements out of Queenstown for couples from Australia, Singapore, the US, and Japan. Up to 205 weddings a year with a full time team of photographers and planners.</span>
+          <span lang="ja">クイーンズタウンを拠点に、オーストラリア、シンガポール、アメリカ、日本のカップルへヘリコプターウェディングとエロープメントを。フォトグラファーとプランナーのフルタイムチームで年間最大205組。</span>
+        </p>
+        <a class="go" href="https://nomad.wedding/" target="_blank" rel="noopener">nomad.wedding <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">2</div>
+    <div class="body">
+      <figure data-drop="img/02-nomad-jp.jpg"><img src="img/02-nomad-jp.jpg" alt="Elopement in a Kyoto garden" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Nomad Weddings <br>Japan</h3>
+        <div class="meta"><span lang="en">Elopements and small weddings, 11 locations, since 2023</span><span lang="ja">エロープメントとスモールウェディング, 11エリア, 2023年〜</span></div>
+        <p>
+          <span lang="en">Kyoto, Tokyo, Kamakura, Mt Fuji, Naoshima, Miyakojima, Niseko, Otaru, Furano and more. A Japanese team that speaks fluent English, which is the reason temples and gardens say yes.</span>
+          <span lang="ja">京都、東京、鎌倉、富士山、直島、宮古島、ニセコ、小樽、富良野ほか。英語が堪能な日本人チーム。寺院や庭園が受け入れてくれる理由はそこにあります。</span>
+        </p>
+        <a class="go" href="https://nomadweddings.jp/" target="_blank" rel="noopener">nomadweddings.jp <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">3</div>
+    <div class="body">
+      <figure data-drop="img/03-property-media.jpg"><img src="img/03-property-media.jpg" alt="Interior photograph of a Hokkaido home" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Property Media <br>Japan</h3>
+        <div class="meta"><span lang="en">Real estate photography, video, and HDR editing</span><span lang="ja">不動産写真、動画、HDR編集</span></div>
+        <p>
+          <span lang="en">Listing photography, walkthrough video, drone, and an AI assisted HDR editing pipeline for agents and developers selling Japanese property to overseas buyers.</span>
+          <span lang="ja">海外バイヤー向けに日本の物件を売るエージェントやデベロッパーのための物件撮影、ウォークスルー動画、ドローン、AIを用いたHDR編集。</span>
+        </p>
+        <a class="go soft" href="#contact"><span lang="en">Enquire</span><span lang="ja">お問い合わせ</span> <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">4</div>
+    <div class="body">
+      <figure data-drop="img/04-consulting.jpg"><img src="img/04-consulting.jpg" alt="Snow covered street in Otaru" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Real Estate <br>Consulting, Japan</h3>
+        <div class="meta"><span lang="en">For overseas buyers, Hokkaido focus</span><span lang="ja">海外バイヤー向け, 北海道中心</span></div>
+        <p>
+          <span lang="en">Buying, renovating, and running property in Japan as a non resident. I have done it myself in Otaru and Niseko, so the advice covers the parts the brochures leave out: structure, tax, contractors, and what a place will actually earn.</span>
+          <span lang="ja">非居住者として日本で物件を買い、直し、運用する。小樽とニセコで自分自身が経験してきたので、パンフレットに書かれない部分まで。法人構造、税務、施工業者、そして実際にいくら稼ぐのか。</span>
+        </p>
+        <a class="go soft" href="#contact"><span lang="en">Book a call</span><span lang="ja">相談する</span> <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">5</div>
+    <div class="body">
+      <figure data-drop="img/05-rentals.jpg"><img src="img/05-rentals.jpg" alt="Living room with mountain view" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Ski Vacation <br>Rentals</h3>
+        <div class="meta"><span lang="en">Queenstown and Otaru</span><span lang="ja">クイーンズタウンと小樽</span></div>
+        <p>
+          <span lang="en">Short stay homes in two ski towns, one in each hemisphere. Run for skiers and families, kept to the standard I would want on my own trip.</span>
+          <span lang="ja">南北両半球のスキータウンに一軒ずつ。スキーヤーと家族のための短期滞在の家。自分が旅で泊まりたい基準で運営しています。</span>
+        </p>
+        <a class="go" href="#" data-todo="airbnb-queenstown" target="_blank" rel="noopener"><span lang="en">Queenstown</span><span lang="ja">クイーンズタウン</span> <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+        &nbsp;&nbsp;&nbsp;
+        <a class="go" href="#" data-todo="airbnb-otaru" target="_blank" rel="noopener"><span lang="en">Otaru</span><span lang="ja">小樽</span> <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">6</div>
+    <div class="body">
+      <figure data-drop="img/06-queenstown-memories.jpg"><img src="img/06-queenstown-memories.jpg" alt="Family on the lakefront in Queenstown" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Queenstown <br>Memories</h3>
+        <div class="meta"><span lang="en">Travel and family photography, Queenstown</span><span lang="ja">旅と家族の写真, クイーンズタウン</span></div>
+        <p>
+          <span lang="en">Photo sessions for visitors to Queenstown and Wanaka. Lakefront, mountain, and helicopter options, with Japanese speaking photographers.</span>
+          <span lang="ja">クイーンズタウンとワナカを訪れる方向けのフォトセッション。湖畔、山、ヘリコプター。日本語対応のフォトグラファーが撮影します。</span>
+        </p>
+        <a class="go" href="https://queenstownmemories.jp/" target="_blank" rel="noopener">queenstownmemories.jp <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">7</div>
+    <div class="body">
+      <figure data-drop="img/07-niseko-memories.jpg"><img src="img/07-niseko-memories.jpg" alt="Couple in fresh snow with Mt Yotei behind" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Niseko <br>Memories</h3>
+        <div class="meta"><span lang="en">Travel and family photography, Niseko</span><span lang="ja">旅と家族の写真, ニセコ</span></div>
+        <p>
+          <span lang="en">Ski days, powder mornings, and portraits under Mt Yotei for families and couples visiting Niseko. Winter is the busy season, but the green season is the secret.</span>
+          <span lang="ja">スキーの日、パウダーの朝、羊蹄山を背にしたポートレート。ニセコを訪れる家族とカップルへ。冬が繁忙期ですが、グリーンシーズンこそ穴場です。</span>
+        </p>
+        <a class="go" href="https://nisekomemories.jp/" target="_blank" rel="noopener">nisekomemories.jp <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="case">
+    <div class="num">8</div>
+    <div class="body">
+      <figure data-drop="img/08-web.jpg"><img src="img/08-web.jpg" alt="Website design shown on a laptop" loading="lazy" onerror="this.remove()"></figure>
+      <div>
+        <h3>Web Marketing <br>and Design</h3>
+        <div class="meta"><span lang="en">Design, build, SEO, structured data, deployment</span><span lang="ja">デザイン、構築、SEO、構造化データ、デプロイ</span></div>
+        <p>
+          <span lang="en">Every site above was designed and built in house. I take on a small number of outside projects for premium travel, hospitality, and property brands that need to rank in English and Japanese.</span>
+          <span lang="ja">上記のサイトはすべて自社で設計・構築。英語と日本語の両方で上位表示が必要なプレミアム旅行、ホスピタリティ、不動産ブランドの案件を、数を絞って受けています。</span>
+        </p>
+        <a class="go soft" href="#contact"><span lang="en">Start a project</span><span lang="ja">相談する</span> <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12L12 2M4 2h8v8"/></svg></a>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="numbers" id="numbers">
+  <h2 class="h2"><span lang="en">In numbers</span><span lang="ja">数字で見る</span></h2>
+  <div class="grid">
+    <div><b>2012</b><span><span lang="en">Nomad Weddings New Zealand founded in Wellington</span><span lang="ja">ウェリントンでNomad Weddings New Zealand創業</span></span></div>
+    <div><b>205</b><span><span lang="en">Weddings a year at peak, with a full time NZ team</span><span lang="ja">ピーク時の年間ウェディング数。NZフルタイムチームで</span></span></div>
+    <div><b>20<small>+</small></b><span><span lang="en">Countries clients have travelled from</span><span lang="ja">クライアントの出身国数</span></span></div>
+    <div><b>11</b><span><span lang="en">Wedding locations covered across Japan</span><span lang="ja">日本国内でカバーするウェディングエリア</span></span></div>
+  </div>
+  <div class="press">
+    <span><span lang="en">Featured in</span><span lang="ja">掲載</span></span>
+    <b>The Japan Times</b>
+  </div>
+</section>
+
+<section class="timeline" id="story">
+  <h2 class="h2"><span lang="en">The story so far</span><span lang="ja">これまで</span></h2>
+  <ol>
+    <li>
+      <span class="yr">2012</span>
+      <span class="what"><span lang="en">Nomad Weddings New Zealand, Wellington</span><span lang="ja">Nomad Weddings New Zealand、ウェリントン</span></span>
+      <span class="note"><span lang="en">Started as a wedding photographer. Grew up between Japan, New Zealand, and Singapore, so international couples were the obvious clients.</span><span lang="ja">ウェディングフォトグラファーとしてスタート。日本、ニュージーランド、シンガポールで育ったので、海外カップルが自然なクライアントでした。</span></span>
+    </li>
+    <li>
+      <span class="yr">2014</span>
+      <span class="what"><span lang="en">Auckland</span><span lang="ja">オークランド</span></span>
+      <span class="note"><span lang="en">Moved the studio north and built the first full time team.</span><span lang="ja">スタジオを北へ移し、最初のフルタイムチームを組む。</span></span>
+    </li>
+    <li>
+      <span class="yr">2015</span>
+      <span class="what"><span lang="en">First Japan wedding, Arashiyama</span><span lang="ja">初の日本でのウェディング、嵐山</span></span>
+      <span class="note"><span lang="en">A Kyoto elopement that turned into an eight year plan.</span><span lang="ja">京都でのエロープメントが、8年がかりの計画の始まりに。</span></span>
+    </li>
+    <li>
+      <span class="yr">2019</span>
+      <span class="what"><span lang="en">Queenstown</span><span lang="ja">クイーンズタウン</span></span>
+      <span class="note"><span lang="en">Relocated to the mountains. Helicopter weddings became the core of the NZ business, and Queenstown Memories followed for visiting families.</span><span lang="ja">山へ移住。ヘリコプターウェディングがNZ事業の中心となり、旅行者向けにQueenstown Memoriesが続く。</span></span>
+    </li>
+    <li>
+      <span class="yr">2023</span>
+      <span class="what"><span lang="en">Back to Japan. Nomad Weddings Japan and Niseko Memories</span><span lang="ja">日本へ帰国。Nomad Weddings JapanとNiseko Memories</span></span>
+      <span class="note"><span lang="en">Moved home full time to be near family and open the Japan branch, with regional planners in Kyoto, Tokyo, Niseko, and Okinawa.</span><span lang="ja">家族のそばで暮らし、日本支社を立ち上げるためにフルタイムで帰国。京都、東京、ニセコ、沖縄にプランナーを配置。</span></span>
+    </li>
+    <li>
+      <span class="yr"><span lang="en">Now</span><span lang="ja">現在</span></span>
+      <span class="what"><span lang="en">Property, rentals, and building for other people</span><span lang="ja">不動産、レンタル、そして他社のブランドづくり</span></span>
+      <span class="note"><span lang="en">Property Media Japan, consulting for overseas buyers, ski rentals in both hemispheres, and a small amount of web work for brands I like.</span><span lang="ja">Property Media Japan、海外バイヤー向けコンサルティング、両半球でのスキーレンタル、そして気に入ったブランドのためのウェブ制作を少し。</span></span>
+    </li>
+  </ol>
+</section>
+
+<footer class="foot" id="contact">
+  <p class="big">
+    <span lang="en">Working on something in Japan or New Zealand? <a href="mailto:hello@jameshirata.com">hello@jameshirata.com</a></span>
+    <span lang="ja">日本かニュージーランドで何か企んでいますか？ <a href="mailto:hello@jameshirata.com">hello@jameshirata.com</a></span>
+  </p>
+  <div class="bottom">
+    <div>James Hirata, 平田滋睦<br><span lang="en">Creative Director, Nomado Ltd</span><span lang="ja">Nomado Ltd クリエイティブディレクター</span></div>
+    <ul>
+      <li><a href="https://nomad.wedding/" target="_blank" rel="noopener">Nomad NZ</a></li>
+      <li><a href="https://nomadweddings.jp/" target="_blank" rel="noopener">Nomad Japan</a></li>
+      <li><a href="https://queenstownmemories.jp/" target="_blank" rel="noopener">Queenstown Memories</a></li>
+      <li><a href="https://nisekomemories.jp/" target="_blank" rel="noopener">Niseko Memories</a></li>
+      <li><a href="#" data-todo="instagram">Instagram</a></li>
+      <li><a href="#" data-todo="linkedin">LinkedIn</a></li>
+    </ul>
+    <div class="r">© <span id="yr"></span> James Hirata<br><span lang="en">Niseko and Queenstown</span><span lang="ja">ニセコとクイーンズタウン</span></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  const html=document.documentElement;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  /* theme: dark by default, like the reference */
+  const th=localStorage.getItem('theme');
+  if(th==='light')html.setAttribute('data-theme','light');
+  document.getElementById('themeBtn').addEventListener('click',()=>{
+    const light=html.getAttribute('data-theme')==='light';
+    if(light)html.removeAttribute('data-theme');else html.setAttribute('data-theme','light');
+    localStorage.setItem('theme',light?'dark':'light');
+    document.querySelector('meta[name=theme-color]').content=light?'#0F0F0F':'#FBFAF7';
+  });
+
+  /* language */
+  const params=new URLSearchParams(location.search);
+  const saved=params.get('lang')||localStorage.getItem('lang')||(navigator.language.startsWith('ja')?'ja':'en');
+  function setLang(l){
+    html.setAttribute('data-lang',l);html.setAttribute('lang',l);
+    localStorage.setItem('lang',l);
+    document.querySelectorAll('.lang-toggle span').forEach(s=>s.classList.toggle('on',s.dataset.l===l));
+    document.title=l==='ja'?'平田滋睦 | 日本とニュージーランドのプレミアムブランド':'James Hirata | Premium brands across Japan and New Zealand';
+  }
+  setLang(saved==='ja'?'ja':'en');
+  document.getElementById('langBtn').addEventListener('click',()=>setLang(html.getAttribute('data-lang')==='ja'?'en':'ja'));
+
+  /* mark figures that loaded an image */
+  document.querySelectorAll('.case figure img').forEach(im=>{
+    const mark=()=>im.parentElement.classList.add('has-img');
+    if(im.complete&&im.naturalWidth)mark();else im.addEventListener('load',mark);
+  });
+
+  const hasGsap=typeof gsap!=='undefined';
+  if(hasGsap)gsap.registerPlugin(ScrollTrigger);
+
+  /* preloader and hero reveal */
+  const loader=document.getElementById('loader');
+  const pct=document.getElementById('pct');
+  const lines=document.querySelectorAll('.hero h1 .line > span');
+  function reveal(){
+    if(!hasGsap||reduce){lines.forEach(s=>s.style.transform='none');document.querySelector('.kanji').style.opacity=1;document.querySelector('.ring').style.opacity=1;return;}
+    const tl=gsap.timeline();
+    tl.to(loader,{yPercent:-100,duration:.9,ease:'power4.inOut'})
+      .to(lines,{y:0,duration:1.1,stagger:.09,ease:'expo.out'},'-=.45')
+      .to('.kanji',{opacity:1,duration:1},'-=.6')
+      .to('.ring',{opacity:1,duration:1},'<');
+    loader.classList.add('done');
+  }
+  if(reduce||!hasGsap){loader.remove();reveal();}
+  else{
+    const c={v:0};
+    gsap.to(c,{v:100,duration:1.6,ease:'power2.inOut',onUpdate:()=>pct.textContent=Math.round(c.v),onComplete:reveal});
+  }
+
+  if(!hasGsap||reduce)return;
+
+  /* spinning ring */
+  gsap.to('.ring',{rotation:360,transformOrigin:'50% 50%',duration:40,repeat:-1,ease:'none'});
+
+  /* marquee: duplicate track, then loop */
+  const track=document.getElementById('track');
+  track.innerHTML+=track.innerHTML;
+  gsap.to(track,{xPercent:-50,duration:28,repeat:-1,ease:'none'});
+
+  /* image parallax inside case frames */
+  document.querySelectorAll('.case figure img').forEach(im=>{
+    gsap.fromTo(im,{yPercent:-8},{yPercent:8,ease:'none',
+      scrollTrigger:{trigger:im.parentElement,start:'top bottom',end:'bottom top',scrub:true}});
+  });
+
+  /* count up in the numbers block, once */
+  document.querySelectorAll('.grid b').forEach(b=>{
+    const t=b.firstChild;const end=parseInt(t.textContent,10);
+    if(isNaN(end))return;
+    const o={v:0};
+    ScrollTrigger.create({trigger:b,start:'top 85%',once:true,onEnter:()=>{
+      gsap.to(o,{v:end,duration:1.4,ease:'power3.out',onUpdate:()=>t.textContent=Math.round(o.v)});
+    }});
+  });
+})();
+</script>
+</body>
+</html>
