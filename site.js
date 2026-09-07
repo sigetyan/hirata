@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded',function(){
     });
     tl.to('.lines i',{scaleY:1,duration:.9,stagger:.05,ease:'power3.out'},0.85)
       .to('#sun',{opacity:.35,duration:1.2},1.2);
-    const jog=()=>{const d=5+Math.random()*10,a=Math.random()*Math.PI*2;return {x:Math.cos(a)*d,y:Math.sin(a)*d};};
-    document.querySelectorAll('.part').forEach((pt,i)=>{const o=jog();tl.to(pt,{x:o.x,y:o.y,duration:.9,ease:'power3.inOut'},2.4+i*.08);});
+    const jog=(i)=>{const sx=i%2?1:-1,sy=Math.random()<.5?-1:1;return {x:sx*(5+Math.random()*7),y:sy*(2+Math.random()*3)};};
+    document.querySelectorAll('.part').forEach((pt,i)=>{const o=jog(i);tl.to(pt,{x:o.x,y:o.y,duration:.9,ease:'power3.inOut'},2.4+i*.08);});
   }
   if(!loader){rows.forEach(r=>r.style.opacity=1);gsap.set('.lines i',{scaleY:1});gsap.set('#sun',{opacity:.35});}
   else{
