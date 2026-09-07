@@ -101,16 +101,18 @@ html[data-theme="light"] .stage::after{opacity:.18}
 /* hero */
 .hero{min-height:100svh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14vh var(--gutter) 8vh;overflow:hidden}
 .wall{position:relative;width:min(1240px,100%);margin:0 auto;padding:4vw 0}
-.part{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.9;letter-spacing:.03em;font-size:clamp(2.4rem,6.8vw,7.8rem);white-space:nowrap;text-align:center;width:100%}
+.part{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.9;letter-spacing:.03em;font-size:clamp(3rem,9.6vw,11rem);white-space:nowrap;text-align:center;width:100%}
 .part.p2,.part.p3,.part.p4{position:absolute;left:0;top:4vw}
 .part.p1{clip-path:inset(-2% 75% -2% 0)}
 .part.p2{clip-path:inset(-2% 50% -2% 25%)}
 .part.p3{clip-path:inset(-2% 25% -2% 50%)}
 .part.p4{clip-path:inset(-2% 0 -2% 75%)}
-html[data-lang="ja"] .part{font-weight:400;font-size:clamp(2rem,5.8vw,6.4rem);letter-spacing:.04em;line-height:1.15}
+html[data-lang="ja"] .part{font-weight:400;font-size:clamp(2.4rem,7.4vw,8rem);letter-spacing:.06em;line-height:1.15}
+html[data-lang="ja"] .part .hr:not(.r1){font-size:.36em;letter-spacing:.14em}
 .part .hr{display:block;opacity:0}
-.part .r1{color:var(--accent)}
-.part .r3,.part .r5{color:var(--grey)}
+.part .r1{color:var(--fg);margin-bottom:.12em}
+.part .hr:not(.r1){font-size:.34em;line-height:1.5;letter-spacing:.2em;color:var(--grey)}
+.part .hr.r3,.part .hr.r5{color:var(--accent)}
 .lines{position:absolute;inset:0;pointer-events:none}
 .lines i{position:absolute;top:0;bottom:0;width:1px;background:var(--fg);opacity:.22;transform:scaleY(0)}
 .lines i:nth-child(1){left:25%;transform-origin:top}
@@ -141,7 +143,8 @@ html[data-lang="ja"] .part{font-weight:400;font-size:clamp(2rem,5.8vw,6.4rem);le
   .me{width:170px;justify-self:center;margin-bottom:8px}
   .tag{text-align:center;justify-self:center}
   .sun{width:120px;right:-30px;top:-30px}
-  .part{font-size:clamp(2rem,9vw,3.6rem)}
+  .part{font-size:clamp(2.4rem,11vw,4.4rem)}
+  .part .hr:not(.r1){font-size:.4em;letter-spacing:.12em}
   .part.p2,.part.p3,.part.p4,.lines{display:none}
   .part.p1{clip-path:none}
 }
