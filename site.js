@@ -198,6 +198,8 @@ document.addEventListener('DOMContentLoaded',function(){
   ScrollTrigger.create({onUpdate:st=>skew(gsap.utils.clamp(-4,4,st.getVelocity()/-350))});
 
 
+  gsap.to('.hand',{rotation:180,ease:'none',scrollTrigger:{trigger:'.hand',start:'top 75%',end:'top 25%',scrub:true}});
+
   /* section titles and rules */
   document.querySelectorAll('[data-rule]').forEach(r=>{
     gsap.fromTo(r,{rotation:80,opacity:0},{rotation:0,opacity:.35,duration:1,ease:'power3.out',scrollTrigger:{trigger:r,start:'top 88%',once:true}});
