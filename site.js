@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded',function(){
     if(reduce){for(let k=0;k<40;k++)frame(k*40);stop();}
   })();
 
-  const GS='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/';
+  const GS='/js/';
   function loadGsap(cb){
     if(window.gsap&&window.ScrollTrigger)return cb();
     const add=(f,done)=>{const sc=document.createElement('script');sc.src=GS+f;sc.onload=done;sc.onerror=()=>cb();document.head.appendChild(sc);};
@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   const phone=matchMedia('(max-width:800px)').matches;
   const loaderEl=document.getElementById('loader');
+  setTimeout(()=>{const l=document.getElementById('loader');if(l&&!html.classList.contains('fx')){l.remove();html.classList.add('static');}},4000);
   if(phone||reduce){
     // phones: show everything at once and only fetch the animation library after the first touch or scroll
     loaderEl.remove();html.classList.add('static');
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded',function(){
   function boot(){
   const hasGsap=typeof gsap!=='undefined';
   if(hasGsap)gsap.registerPlugin(ScrollTrigger);
-  if(!hasGsap||reduce){html.classList.add('static');return;}
+  if(!hasGsap||reduce){const l=document.getElementById('loader');if(l)l.remove();html.classList.add('static');return;}
   html.classList.remove('static');
 
   const loader=document.getElementById('loader');
