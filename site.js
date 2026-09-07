@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded',function(){
   const saved=params.get('lang')||localStorage.getItem('lang')||(navigator.language.startsWith('ja')?'ja':'en');
   function setLang(l){
     html.setAttribute('data-lang',l);html.setAttribute('lang',l);
+    const ot=document.getElementById('ovtext');if(ot){ot.textContent=(ot.dataset[l]||ot.dataset.en).repeat(24);}
     localStorage.setItem('lang',l);
     document.querySelectorAll('.lang-toggle span').forEach(s=>s.classList.toggle('on',s.dataset.l===l));
     document.title=l==='ja'?'平田滋睦 | 日本とニュージーランドでのクリエイティブ・マーケティング・コンサルティング':'James Hirata | Creative, marketing and consulting across Japan and New Zealand';
@@ -198,6 +199,9 @@ document.addEventListener('DOMContentLoaded',function(){
   ScrollTrigger.create({onUpdate:st=>skew(gsap.utils.clamp(-4,4,st.getVelocity()/-350))});
 
 
+  const ot=document.getElementById('ovtext');
+  if(ot){const phrase=()=>{const one=(ot.dataset[html.getAttribute('data-lang')]||ot.dataset.en).length;try{return ot.getSubStringLength(0,one);}catch(e){return 200;}};
+    let tw;const run=()=>{if(tw)tw.kill();ot.setAttribute('startOffset',0);tw=gsap.to(ot,{attr:{startOffset:-phrase()},duration:6,repeat:-1,ease:'none'});};run();document.getElementById('langBtn').addEventListener('click',()=>setTimeout(run,50));}
   gsap.to('.hand',{rotation:180,ease:'none',scrollTrigger:{trigger:'.hand',start:'top 75%',end:'top 25%',scrub:true}});
 
   /* section titles and rules */
