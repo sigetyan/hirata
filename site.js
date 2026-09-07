@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded',function(){
     tl.to('.lines i',{scaleY:1,duration:.9,stagger:.05,ease:'power3.out'},0.85)
       .to('#sun',{opacity:.35,duration:1.2},1.2);
   }
-  if(!loader){rows.forEach(r=>r.style.opacity=1);document.querySelectorAll('.lines i').forEach(i=>i.style.transform='none');gsap.set('#sun',{opacity:.35});}
+  if(!loader){rows.forEach(r=>r.style.opacity=1);gsap.set('.lines i',{scaleY:1});gsap.set('#sun',{opacity:.35});}
   else{
     const c={v:0};const cnt=document.getElementById('cnt'),pct=document.getElementById('pct');
     gsap.to(c,{v:100,duration:1.1,ease:'power2.inOut',onUpdate:()=>{cnt.textContent=pct.textContent=Math.round(c.v)},onComplete:reveal});
