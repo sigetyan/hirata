@@ -77,15 +77,12 @@ html[data-theme="light"] .stage::after{opacity:.18}
 
 /* hero */
 .hero{min-height:100svh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14vh var(--gutter) 8vh;overflow:hidden}
-.wall{position:relative;width:min(1240px,100%);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;column-gap:4%;row-gap:5vw;padding:0 2%}
-.part{position:relative;font-family:var(--display);font-weight:100;font-stretch:118%;text-transform:uppercase;line-height:.9;letter-spacing:.01em;font-size:clamp(2.2rem,5vw,5.6rem);white-space:nowrap;text-align:left}
-html[data-lang="ja"] .part{font-weight:200;font-size:clamp(2rem,4.4vw,4.8rem);letter-spacing:.02em}
+.wall{position:relative;width:min(1240px,100%);margin:0 auto;display:flex;justify-content:center;padding:4vw 0}
+.part{position:relative;font-family:var(--display);font-weight:100;font-stretch:118%;text-transform:uppercase;line-height:.88;letter-spacing:.01em;font-size:clamp(3rem,9vw,10rem);white-space:nowrap;text-align:center}
+html[data-lang="ja"] .part{font-weight:200;font-size:clamp(2.4rem,7.4vw,8rem);letter-spacing:.02em}
 .part .hr{display:block;opacity:0}
-.part.p2,.part.p3{opacity:.3}
-.part.p2{justify-self:end}
-.part.p4{justify-self:end}
-.part.p1 .r4,.part.p4 .r1{color:var(--dim)}
-.part.p2 .r1,.part.p3 .r4{color:var(--accent)}
+.part .r2{color:var(--grey)}
+.part .r4{color:var(--accent)}
 .lines{position:absolute;inset:0;pointer-events:none}
 .lines i{position:absolute;top:-6%;bottom:-6%;width:1px;background:var(--fg);opacity:.18;transform:scaleY(0)}
 .lines i:nth-child(1){left:0;transform-origin:top}
@@ -108,10 +105,7 @@ html[data-lang="ja"] .part{font-weight:200;font-size:clamp(2rem,4.4vw,4.8rem);le
   .hero-foot{grid-template-columns:1fr;text-align:center}
   .weare,.play{text-align:center}
   .sun{width:120px;right:-30px;top:-30px}
-  .part.p2,.part.p3{display:none}
-  .wall{grid-template-columns:1fr;row-gap:8vw}
-  .part{font-size:clamp(2.4rem,11vw,4rem)}
-  .part.p4{justify-self:start;padding-left:12%}
+  .part{font-size:clamp(2.6rem,12.5vw,5rem)}
   .lines i:nth-child(2){display:none}
 }
 
@@ -255,7 +249,7 @@ html.static .rule{transform:none}
 <header class="hero" id="top">
   <div class="wall">
     <h1 class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">James Hirata builds premium brands across Japan and New Zealand.</h1>
-    <div class="part p1" aria-hidden="false"><span class="hr r1"><span lang="en">James Hirata</span><span lang="ja">平田滋睦</span></span><span class="hr r2"><span lang="en">Premium</span><span lang="ja">プレミアム</span></span><span class="hr r3"><span lang="en">Brands</span><span lang="ja">ブランド</span></span><span class="hr r4"><span lang="en">Japan / NZ</span><span lang="ja">日本 / NZ</span></span></div><div class="part p2" aria-hidden="true"><span class="hr r1"><span lang="en">James Hirata</span><span lang="ja">平田滋睦</span></span><span class="hr r2"><span lang="en">Premium</span><span lang="ja">プレミアム</span></span><span class="hr r3"><span lang="en">Brands</span><span lang="ja">ブランド</span></span><span class="hr r4"><span lang="en">Japan / NZ</span><span lang="ja">日本 / NZ</span></span></div><div class="part p3" aria-hidden="true"><span class="hr r1"><span lang="en">James Hirata</span><span lang="ja">平田滋睦</span></span><span class="hr r2"><span lang="en">Premium</span><span lang="ja">プレミアム</span></span><span class="hr r3"><span lang="en">Brands</span><span lang="ja">ブランド</span></span><span class="hr r4"><span lang="en">Japan / NZ</span><span lang="ja">日本 / NZ</span></span></div><div class="part p4" aria-hidden="true"><span class="hr r1"><span lang="en">James Hirata</span><span lang="ja">平田滋睦</span></span><span class="hr r2"><span lang="en">Premium</span><span lang="ja">プレミアム</span></span><span class="hr r3"><span lang="en">Brands</span><span lang="ja">ブランド</span></span><span class="hr r4"><span lang="en">Japan / NZ</span><span lang="ja">日本 / NZ</span></span></div>
+    <div class="part p1" aria-hidden="false"><span class="hr r1"><span lang="en">James Hirata</span><span lang="ja">平田滋睦</span></span><span class="hr r2"><span lang="en">Premium</span><span lang="ja">プレミアム</span></span><span class="hr r3"><span lang="en">Brands</span><span lang="ja">ブランド</span></span><span class="hr r4"><span lang="en">Japan / NZ</span><span lang="ja">日本 / NZ</span></span></div>
     <div class="lines" aria-hidden="true"><i></i><i></i><i></i></div>
     <svg class="sun" id="sun" viewBox="0 0 200 200" aria-hidden="true"></svg>
   </div>
