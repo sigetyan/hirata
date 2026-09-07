@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded',function(){
     svg.innerHTML=s;
   }
   burst(document.getElementById('sun'),36);
-  document.querySelectorAll('[data-spin]').forEach(s=>burst(s,24));
+  document.querySelectorAll('[data-spin]').forEach(s=>burst(s,+s.dataset.lines||24));
 
   /* theme */
   const th=localStorage.getItem('theme');
