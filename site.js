@@ -1,3 +1,4 @@
+const SITE_BASE=(document.currentScript&&document.currentScript.src)?document.currentScript.src.replace(/site\.js.*$/,''):'/';
 document.addEventListener('DOMContentLoaded',function(){
   const html=document.documentElement;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -98,10 +99,10 @@ document.addEventListener('DOMContentLoaded',function(){
     if(reduce){for(let k=0;k<40;k++)frame(k*40);stop();}
   })();
 
-  const GS='/js/';
+  const GS=SITE_BASE+'js/';
   function loadGsap(cb){
     if(window.gsap&&window.ScrollTrigger)return cb();
-    const add=(f,done)=>{const sc=document.createElement('script');sc.src=GS+f;sc.onload=done;sc.onerror=()=>cb();document.head.appendChild(sc);};
+    const add=(f,done)=>{const sc=document.createElement('script');sc.src=GS+f;sc.onload=done;sc.onerror=()=>{console.warn('jameshirata: could not load '+GS+f+', showing the static site');cb();};document.head.appendChild(sc);};
     add('gsap.min.js',()=>add('ScrollTrigger.min.js',cb));
   }
   const phone=matchMedia('(max-width:800px)').matches;
