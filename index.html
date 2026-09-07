@@ -264,6 +264,7 @@ html.static .rule{transform:none}
   .cur.view .cur-ring{width:92px;height:92px;background:#fff;border-color:#fff}
   .cur-txt{font-family:var(--text);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#000;opacity:0;transition:opacity .3s}
   .cur.view .cur-txt{opacity:1}
+  .cur.fine .cur-ring{width:14px;height:14px;background:transparent;border-color:var(--accent)}
 }
 .cur{display:none} @media (pointer:fine){ html.fx .cur{display:block} }
 /* distortion on hover: applied via JS so only one element warps at a time */
@@ -274,6 +275,11 @@ html.static .rule{transform:none}
 
 /* grain drift */
 .stage::after{animation:grain 1.2s steps(4) infinite;inset:-4%}
+/* matrix rain in the web card */
+.case-matrix{background:#0A0A0A;cursor:crosshair}
+.case-matrix canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.case-matrix::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:repeating-linear-gradient(0deg,rgba(0,0,0,0) 0 2px,rgba(0,0,0,.18) 2px 3px)}
+.case-matrix::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;box-shadow:inset 0 0 60px rgba(0,0,0,.8)}
 /* heading letters */
 .h-big,.h-thin{overflow:hidden}
 .ch{display:inline-block}
@@ -395,7 +401,7 @@ html.static .rule{transform:none}
   </article>
   <article class="case" style="--op:0.85">
     <div class="case-top">
-      <figure class="case-img" data-drop="images/03-property-media.jpg"><img src="images/03-property-media.jpg" alt="Interior photograph of a Hokkaido home" loading="lazy" onerror="this.remove()"></figure>
+      <figure class="case-img" data-drop="images/niseko-real-estate-photographer.webp"><img src="images/niseko-real-estate-photographer.webp" alt="Interior photograph of a Hokkaido home" loading="lazy" onerror="this.remove()"></figure>
       <div class="case-index">3</div>
     </div>
     <div class="case-body">
@@ -465,7 +471,7 @@ html.static .rule{transform:none}
   </article>
   <article class="case" style="--op:0.55">
     <div class="case-top">
-      <figure class="case-img" data-drop="images/08-web.jpg"><img src="images/08-web.jpg" alt="Website design shown on a laptop" loading="lazy" onerror="this.remove()"></figure>
+      <figure class="case-img case-matrix has-img"><canvas id="matrix" aria-label="Matrix style code rain, move the mouse over it"></canvas></figure>
       <div class="case-index">8</div>
     </div>
     <div class="case-body">
@@ -607,6 +613,59 @@ html.static .rule{transform:none}
     if(typeof gsap!=='undefined'&&!reduce)gsap.to(tr,{xPercent:-50,duration:dur,repeat:-1,ease:'none'});}
   loop('bottrack',40);
 
+  /* matrix rain: katakana and code glyphs, columns react to the pointer, click for a surge */
+  (function(){
+    const cv=document.getElementById('matrix');if(!cv)return;
+    const ctx=cv.getContext('2d');
+    const glyphs='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789<>/{}=;:#$%&*+-ABCDEFGHJKLMNPQRSTUVWXYZ';
+    const words=['NOMADO','SEO','JSON-LD','KOBE','QUEENSTOWN','SCHEMA','HREFLANG','GSAP','平田','NISEKO'];
+    let W,H,cols,drops,speeds,glow,wordCol,dpr,fs=16,mouse={x:-1e4,y:-1e4},surge=0,running=false,last=0;
+    function size(){
+      dpr=Math.min(devicePixelRatio||1,1.5);
+      const r=cv.getBoundingClientRect();W=r.width;H=r.height;
+      cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+      fs=Math.max(12,Math.round(W/34));cols=Math.ceil(W/fs);
+      drops=Array.from({length:cols},()=>Math.random()*-H/fs);
+      speeds=Array.from({length:cols},()=>.6+Math.random()*.9);
+      glow=new Float32Array(cols);wordCol={};
+      ctx.fillStyle='#0A0A0A';ctx.fillRect(0,0,W,H);
+    }
+    function frame(t){
+      if(!running)return;
+      requestAnimationFrame(frame);
+      if(t-last<33)return;last=t;
+      ctx.fillStyle='rgba(10,10,10,.16)';ctx.fillRect(0,0,W,H);
+      ctx.font=fs+'px "Hanken Grotesk","Noto Sans JP",monospace';ctx.textBaseline='top';
+      const mr=fs*4;
+      for(let i=0;i<cols;i++){
+        const x=i*fs,y=drops[i]*fs;
+        const d=Math.hypot(x+fs/2-mouse.x,y-mouse.y);
+        const near=d<mr?1-d/mr:0;
+        glow[i]=Math.max(glow[i]*.9,near,surge);
+        let ch;
+        if(wordCol[i]&&wordCol[i].i<wordCol[i].w.length){ch=wordCol[i].w[wordCol[i].i++];}
+        else{ch=glyphs[(Math.random()*glyphs.length)|0];if(Math.random()<.004)wordCol[i]={w:words[(Math.random()*words.length)|0],i:0};}
+        const g=glow[i];
+        // trail glyph in yellow, head in white; nearby columns burn brighter
+        ctx.fillStyle=g>.5?'#FFFFFF':g>0?`rgba(255,${200+g*55|0},120,${.6+g*.4})`:'rgba(232,182,55,.75)';
+        ctx.fillText(ch,x,y);
+        if(g>0){ctx.fillStyle=`rgba(232,182,55,${g*.25})`;ctx.fillRect(x,0,fs,H);}
+        drops[i]+=speeds[i]*(1+g*2.5)+surge*2;
+        if(y>H&&Math.random()>.965)drops[i]=Math.random()*-20;
+      }
+      surge*=.92;
+    }
+    function start(){if(running)return;running=true;requestAnimationFrame(frame);}
+    function stop(){running=false;}
+    size();
+    new ResizeObserver(size).observe(cv);
+    new IntersectionObserver(e=>e[0].isIntersecting?start():stop(),{threshold:.05}).observe(cv);
+    cv.addEventListener('pointermove',e=>{const r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+    cv.addEventListener('pointerleave',()=>{mouse.x=mouse.y=-1e4;});
+    cv.addEventListener('pointerdown',()=>{surge=1;});
+    if(reduce){for(let k=0;k<40;k++)frame(k*40);stop();}
+  })();
+
   const hasGsap=typeof gsap!=='undefined';
   if(hasGsap)gsap.registerPlugin(ScrollTrigger);
 
@@ -641,6 +700,7 @@ html.static .rule{transform:none}
     window.addEventListener('mousemove',e=>{gsap.set(dot,{x:e.clientX,y:e.clientY});qx(e.clientX);qy(e.clientY);});
     document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('hover'));el.addEventListener('mouseleave',()=>cur.classList.remove('hover'));});
     document.querySelectorAll('.case').forEach(c=>{c.addEventListener('mouseenter',()=>{ctxt.textContent=html.getAttribute('data-lang')==='ja'?'見る':'view';cur.classList.add('view');});c.addEventListener('mouseleave',()=>cur.classList.remove('view'));});
+    const mcv=document.getElementById('matrix');if(mcv){mcv.addEventListener('mouseenter',()=>{cur.classList.remove('view');cur.classList.add('fine');});mcv.addEventListener('mouseleave',()=>{cur.classList.remove('fine');cur.classList.add('view');});}
   }
 
   /* mouse parallax on the hero */
