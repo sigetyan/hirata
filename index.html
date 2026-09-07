@@ -165,11 +165,11 @@ html[data-lang="ja"] .services .list{font-weight:300;font-size:clamp(1.3rem,3vw,
 
 /* cases */
 .cases{padding-top:4vh}
-.cases .wrap{width:min(760px,100%);display:flex;flex-direction:column;gap:12px;margin-top:5vh}
+.cases .wrap{width:min(760px,100%);display:flex;flex-direction:column;gap:12px;margin-top:5vh;will-change:transform}
 .case{background:rgba(var(--card),var(--op));color:var(--card-fg);padding:clamp(18px,3.4vw,44px);text-align:left;border-radius:2px}
 .case-top{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
 .case-img{aspect-ratio:1/1;background:rgba(0,0,0,.08);overflow:hidden;position:relative}
-.case-img img{width:100%;height:114%;object-fit:cover;position:absolute;top:-7%;left:0}
+.case-img img{width:100%;height:114%;object-fit:cover;position:absolute;top:-7%;left:0;will-change:transform}
 .case-img::after{content:attr(data-drop);position:absolute;left:12px;bottom:10px;font-size:.62rem;letter-spacing:.06em;opacity:.55}
 .case-img.has-img::after{display:none}
 .case-index{justify-self:end;font-family:var(--title);font-weight:400;font-size:clamp(4rem,12vw,11rem);line-height:.8;letter-spacing:-.02em}
@@ -271,14 +271,17 @@ html.static .rule{transform:none}
 .distort.warping{filter:url(#warp)}
 /* grain drift */
 @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-2%,1%)}50%{transform:translate(1%,-2%)}75%{transform:translate(-1%,-1%)}100%{transform:translate(0,0)}}
+
+/* grain drift */
 .stage::after{animation:grain 1.2s steps(4) infinite;inset:-4%}
 /* heading letters */
 .h-big,.h-thin{overflow:hidden}
-.ch{display:inline-block;will-change:transform}
+.ch{display:inline-block}
 .case-img img{transition:filter .5s var(--ease)}
-.case:hover .case-img img{filter:contrast(1.06) saturate(1.1)}
 .case{transition:transform .8s var(--ease)}
 .case:hover{transform:translateY(-4px)}
+.case:hover .case-img img{filter:contrast(1.06) saturate(1.1)}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .stage::after{animation:none}
@@ -556,7 +559,6 @@ html.static .rule{transform:none}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script>
 (function(){
   const html=document.documentElement;
@@ -632,14 +634,6 @@ html.static .rule{transform:none}
   if(!hasGsap||reduce)return;
   html.classList.add('fx');
 
-  /* smooth scroll (Lenis) tied to ScrollTrigger */
-  if(typeof Lenis!=='undefined'){
-    const lenis=new Lenis({lerp:.09,smoothWheel:true});
-    lenis.on('scroll',ScrollTrigger.update);
-    gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
-    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t,{offset:-40});}}));
-  }
-
   /* custom cursor: dot follows tight, ring lags; ring grows on links, becomes a "view" badge on cases */
   const cur=document.getElementById('cur'),dot=cur.querySelector('.cur-dot'),ring=cur.querySelector('.cur-ring'),ctxt=cur.querySelector('.cur-txt');
   if(matchMedia('(pointer:fine)').matches){
@@ -650,13 +644,16 @@ html.static .rule{transform:none}
   }
 
   /* mouse parallax on the hero */
-  const sunEl=document.getElementById('sun'),me=document.querySelector('.me'),wall=document.querySelector('.wall');
+  const sunEl=document.getElementById('sun'),me=document.querySelector('.me');
+  const sx=gsap.quickTo(sunEl,'x',{duration:1,ease:'power2'}),sy=gsap.quickTo(sunEl,'y',{duration:1,ease:'power2'});
+  const mx=gsap.quickTo(me,'x',{duration:1,ease:'power2'}),my=gsap.quickTo(me,'y',{duration:1,ease:'power2'});
+  const wall=document.querySelector('.wall');gsap.set(wall,{transformPerspective:1400});
+  const rx=gsap.quickTo(wall,'rotationX',{duration:1.2,ease:'power2'}),ry=gsap.quickTo(wall,'rotationY',{duration:1.2,ease:'power2'});
   window.addEventListener('mousemove',e=>{
+    if(window.scrollY>innerHeight)return;
     const nx=(e.clientX/innerWidth-.5),ny=(e.clientY/innerHeight-.5);
-    gsap.to(sunEl,{x:nx*-40,y:ny*-40,duration:1.2,ease:'power2.out',overwrite:'auto'});
-    gsap.to(me,{x:nx*14,y:ny*14,duration:1.2,ease:'power2.out',overwrite:'auto'});
-    gsap.to(wall,{rotationY:nx*4,rotationX:ny*-4,transformPerspective:1400,duration:1.2,ease:'power2.out',overwrite:'auto'});
-  });
+    sx(nx*-40);sy(ny*-40);mx(nx*14);my(ny*14);rx(ny*-4);ry(nx*4);
+  },{passive:true});
 
   /* liquid distortion on hover (one shared filter) */
   const wT=document.getElementById('warpT'),wD=document.getElementById('warpD');const wv={f:0,s:0};
@@ -686,10 +683,10 @@ html.static .rule{transform:none}
   const wrap=document.querySelector('.cases .wrap');
   const skew=gsap.quickTo(wrap,'skewY',{duration:.6,ease:'power3'});
   ScrollTrigger.create({onUpdate:st=>skew(gsap.utils.clamp(-4,4,st.getVelocity()/-350))});
-  gsap.to('.botbar .track',{timeScale:1});
 
-  gsap.to('#sun',{rotation:360,transformOrigin:'50% 50%',duration:60,repeat:-1,ease:'none'});
-  gsap.to('[data-spin]',{rotation:360,transformOrigin:'50% 50%',duration:30,repeat:-1,ease:'none'});
+  const sunSpin=gsap.to('#sun',{rotation:360,transformOrigin:'50% 50%',duration:60,repeat:-1,ease:'none'});
+  ScrollTrigger.create({trigger:'.hero',start:'top bottom',end:'bottom top',onToggle:st=>st.isActive?sunSpin.play():sunSpin.pause()});
+  document.querySelectorAll('[data-spin]').forEach(el=>{const tw=gsap.to(el,{rotation:360,transformOrigin:'50% 50%',duration:30,repeat:-1,ease:'none',paused:true});ScrollTrigger.create({trigger:el,start:'top bottom',end:'bottom top',onToggle:st=>st.isActive?tw.play():tw.pause()});});
   gsap.to('.me-ring',{rotation:360,transformOrigin:'50% 50%',duration:45,repeat:-1,ease:'none'});
 
   /* section titles and rules */
