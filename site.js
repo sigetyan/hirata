@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded',function(){
     rows.forEach((r,i)=>{
       const [dx,dy]=vec[i%vec.length];
       if(!dx&&!dy){tl.set(r,{opacity:1},0.6);return;}
-      tl.fromTo(r,{opacity:0,x:dx,y:dy},{opacity:1,x:0,y:0,duration:2,ease:'power4.out'},0.6);
+      tl.fromTo(r,{opacity:0,x:dx,y:dy,force3D:false},{opacity:1,x:0,y:0,duration:2,ease:'power4.out',force3D:false},0.6);
     });
     tl.to('.lines i',{scaleY:1,duration:.9,stagger:.05,ease:'power3.out'},0.85)
       .to('#sun',{opacity:.35,duration:1.2},1.2);
@@ -161,12 +161,12 @@ document.addEventListener('DOMContentLoaded',function(){
   const sunEl=document.getElementById('sunwrap'),me=document.querySelector('.me');
   const sx=gsap.quickTo(sunEl,'x',{duration:1,ease:'power2'}),sy=gsap.quickTo(sunEl,'y',{duration:1,ease:'power2'});
   const mx=gsap.quickTo(me,'x',{duration:1,ease:'power2'}),my=gsap.quickTo(me,'y',{duration:1,ease:'power2'});
-  const wall=document.querySelector('.wall');gsap.set(wall,{transformPerspective:1400});
-  const rx=gsap.quickTo(wall,'rotationX',{duration:1.2,ease:'power2'}),ry=gsap.quickTo(wall,'rotationY',{duration:1.2,ease:'power2'});
+  const wall=document.querySelector('.wall');
+  const rx=gsap.quickTo(wall,'y',{duration:1.2,ease:'power2'}),ry=gsap.quickTo(wall,'x',{duration:1.2,ease:'power2'});
   window.addEventListener('mousemove',e=>{
     if(window.scrollY>innerHeight)return;
     const nx=(e.clientX/innerWidth-.5),ny=(e.clientY/innerHeight-.5);
-    sx(nx*-40);sy(ny*-40);mx(nx*14);my(ny*14);rx(ny*-4);ry(nx*4);
+    sx(nx*-40);sy(ny*-40);mx(nx*14);my(ny*14);rx(ny*-8);ry(nx*-8);
   },{passive:true});
 
   /* cover: liquid ripple over the disciplines, chromatic split over the name, both following the pointer */
