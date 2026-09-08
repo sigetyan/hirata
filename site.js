@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded',function(){
   const ot=document.getElementById('ovtext');
   if(ot){const phrase=()=>{const one=(ot.dataset[html.getAttribute('data-lang')]||ot.dataset.en).length;try{return ot.getSubStringLength(0,one);}catch(e){return 200;}};
     let tw;const run=()=>{if(tw)tw.kill();ot.setAttribute('startOffset',0);tw=gsap.to(ot,{attr:{startOffset:-phrase()},duration:6,repeat:-1,ease:'none'});};run();document.getElementById('langBtn').addEventListener('click',()=>setTimeout(run,50));}
-  gsap.to('.hand',{rotation:180,ease:'none',scrollTrigger:{trigger:'.hand',start:'top 75%',end:'top 25%',scrub:true}});
+  gsap.fromTo('.hand',{rotation:-90},{rotation:90,ease:'none',scrollTrigger:{trigger:'.hand',start:'top 75%',end:'top 25%',scrub:true}});
 
   /* section titles and rules */
   document.querySelectorAll('[data-rule]').forEach(r=>{
