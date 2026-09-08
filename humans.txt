@@ -1,0 +1,11 @@
+/* TEAM */
+Creative Director, design and build: James Hirata (平田滋睦)
+Site: https://www.jameshirata.com/
+Location: Hokkaido and Kansai, Japan; Queenstown, New Zealand
+
+/* SITE */
+Last update: 2026-09-08
+Language: English, Japanese
+Standards: HTML5, CSS3, SVG, JSON-LD
+Components: GSAP, ScrollTrigger
+Fonts: Italiana, Playfair Display, Hanken Grotesk, Shippori Mincho, Noto Sans JP
