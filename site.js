@@ -169,6 +169,39 @@ document.addEventListener('DOMContentLoaded',function(){
     sx(nx*-40);sy(ny*-40);mx(nx*14);my(ny*14);rx(ny*-4);ry(nx*4);
   },{passive:true});
 
+  /* cover: liquid ripple over the disciplines, chromatic split over the name, both following the pointer */
+  (function(){
+    const wallEl=document.querySelector('.wall'),name=document.querySelector('.part.p1 .hr.r1'),rowsEl=[...document.querySelectorAll('.part.p1 .hr:not(.r1)')];
+    if(!wallEl||!name||!matchMedia('(pointer:fine)').matches)return;
+    const lT=document.getElementById('liqT'),lD=document.getElementById('liqD');
+    const liq={s:0,f:0.005,seed:2};
+    const liqTo=gsap.quickTo(liq,'s',{duration:.5,ease:'power2',onUpdate:()=>{lD.setAttribute('scale',liq.s);}});
+    const seedTw=gsap.to(liq,{seed:60,duration:12,repeat:-1,ease:'none',paused:true,onUpdate:()=>lT.setAttribute('seed',Math.round(liq.seed))});
+    const fxTo=gsap.quickTo(liq,'f',{duration:.6,ease:'power2',onUpdate:()=>lT.setAttribute('baseFrequency',liq.f+' '+(liq.f*2.2))});
+    const parts=[...document.querySelectorAll('.part')];
+    const ab={x:0,y:0,a:0,b:0};
+    const abx=gsap.quickTo(ab,'x',{duration:.4,ease:'power2',onUpdate:paint}),aby=gsap.quickTo(ab,'y',{duration:.4,ease:'power2',onUpdate:paint}),aba=gsap.quickTo(ab,'a',{duration:.4,ease:'power2',onUpdate:paint});
+    function paint(){parts.forEach(p=>{p.style.setProperty('--ab1',`${ab.x}px ${ab.y}px`);p.style.setProperty('--ab2',`${-ab.x}px ${-ab.y}px`);p.style.setProperty('--aba',ab.a);p.style.setProperty('--abb',ab.a*.5);});}
+    let inside=false;
+    wallEl.addEventListener('pointermove',e=>{
+      const nr=name.getBoundingClientRect();
+      const overName=e.clientY>=nr.top&&e.clientY<=nr.bottom;
+      const rr=rowsEl.map(r=>r.getBoundingClientRect());
+      const top=Math.min(...rr.map(r=>r.top)),bot=Math.max(...rr.map(r=>r.bottom));
+      const overRows=e.clientY>=top&&e.clientY<=bot;
+      if(overRows){
+        if(!inside){inside=true;wallEl.classList.add('liq');seedTw.play();}
+        const cx=(e.clientX-wallEl.getBoundingClientRect().left)/wallEl.clientWidth;
+        liqTo(18);fxTo(0.004+cx*0.006);
+      }else if(inside){inside=false;liqTo(0);setTimeout(()=>{if(!inside){wallEl.classList.remove('liq');seedTw.pause();}},600);}
+      if(overName){
+        const cx=(e.clientX-nr.left)/nr.width-.5,cy=(e.clientY-nr.top)/nr.height-.5;
+        abx(cx*22);aby(cy*10);aba(.85);
+      }else{aba(0);}
+    });
+    wallEl.addEventListener('pointerleave',()=>{inside=false;liqTo(0);aba(0);setTimeout(()=>{wallEl.classList.remove('liq');seedTw.pause();},600);});
+  })();
+
   /* liquid distortion on hover (one shared filter) */
   const wT=document.getElementById('warpT'),wD=document.getElementById('warpD');const wv={f:0,s:0};
   function warp(el,on){
